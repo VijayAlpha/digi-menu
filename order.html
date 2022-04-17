@@ -11,7 +11,7 @@
     <link rel="shortcut icon" href="src/img/favicon.png" type="image/x-icon" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="src/css/main.css" />
-    <script defer src="src/js/admin.js"></script>
+    <script defer src="src/js/order.js"></script>
 
     <title>Digital menu</title>
   </head>
@@ -24,16 +24,17 @@
         <nav class="nav">
           <ul class="nav__list">
             <li class="nav__item">
-              <button class="nav__btn nav__btn--add-recipe">
-                <span>Add Dish</span>
-              </button>
+                <a href="/admin.html" target="_self">
+                    <button class="nav__btn nav__btn--add-recipe">
+                        <span>Add Dish</span>
+                    </button>
+                </a>
             </li>
             <li class="nav__item">
-              <a href="/orders.html" target="blank">
                 <button class="nav__btn nav__btn--bookmarks">
                   <span>Orders</span>
                 </button>
-              </a>
+            </li>
               <!-- <div class="bookmarks">
                 <ul class="bookmarks__list">
                   <div class="message">
@@ -67,8 +68,8 @@
         </nav>
       </header>
 
-      <div class="search-results">
-        <div class="" style="text-align: center;">
+       <div class="search-results">
+        <!-- <div class="" style="text-align: center;">
           <h3 class="upload__heading">Add Dish</h3>
           <form class="upload__column" id="addDishForm" style="margin-right: 2rem;">
             <label>Dish Name</label>
@@ -86,8 +87,8 @@
               <span>Upload</span>
             </button>
           </form>
-        </div>
-        <div style="margin-top: 4rem;">
+        </div> --> 
+        <div >
 
         
         <h1 class="heading--2">Orders</h1>
@@ -96,20 +97,24 @@
           <!-- <li class="preview">
             <a class="preview__link preview__link--active" href="#23456">
               <figure class="preview__fig">
-                <img src="src/img/test-1.jpg" alt="Test" />
-              </figure>
-              <div class="preview__data">
-                <h4 class="preview__title preview__title--full-width">Pasta with Tomato Cream ... Pasta with Tomato Crea</h4>
-                <p class="preview__publisher">The Pioneer Woman</p>
-                <div class="preview__user-generated">
-                  <svg>
+                <svg>
                     <use href="src/img/icons.svg#icon-user"></use>
-                  </svg>
+                </svg>
+              </figure>
+              <div class="preview__data preview__data--fr">
+                <h4 class="preview__title preview__title--full-width">User Name</h4>
+                <div class="flex flex__btw">
+                    <p class="preview__publisher">Biriyani</p>
+                    <p class="preview__publisher">2 </p>
+                </div>
+                <div class="flex flex__btw">
+                    <p class="preview__publisher">egg Biriyani</p>
+                    <p class="preview__publisher">2 </p>
                 </div>
               </div>
             </a>
-          </li> -->
-          
+          </li>
+           -->
         </ul>
       </div>
         <p class="copyright">

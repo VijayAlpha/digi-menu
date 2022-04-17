@@ -73,3 +73,15 @@ body {
     border-radius: 0;
   }
 }
+
+.flex{
+  display: flex;
+  padding: 1rem 4rem;
+  &__btw{
+    justify-content: space-between;
+  }
+
+  &__even{
+    justify-content: space-evenly;
+  }
+}

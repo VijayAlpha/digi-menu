@@ -60,6 +60,11 @@
     grid-template-columns: 1fr 2rem;
     row-gap: 0.1rem;
     align-items: center;
+
+    &--fr{
+      grid-template-columns: 1fr;
+
+    }
   }
 
   &__title {

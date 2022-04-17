@@ -7,7 +7,7 @@ const dishMarkUp = (dish) => {
       </figure>
       <div class="preview__data">
         <h4 class="preview__title preview__title--full-width">${dish.DishName}</h4>
-        <p class="preview__publisher">${dish.Price}</p>
+        <p class="preview__publisher">Rs ${dish.Price}</p>
         <div class="preview__user-generated">
             ${dish.time} Mins
         </div>
