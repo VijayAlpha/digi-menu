@@ -9,6 +9,7 @@
       rel="stylesheet"
     />
     <link rel="shortcut icon" href="src/img/favicon.png" type="image/x-icon" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <link rel="stylesheet" href="src/css/main.css" />
     <script defer src="src/js/menu.js"></script>
@@ -92,7 +93,7 @@
           </h1>
         </figure>
         <div class="dish-box">
-          <div class="recipe__details flex__btw">
+          <!-- <div class="recipe__details flex__btw">
             <div class="flex flex__btw" style="flex: 1">
               <div class="recipe__info">
                 <span class="recipe__info-data recipe__info-data--people"
@@ -123,48 +124,51 @@
               </div>
             </div>
             <div class="flex">
-              <div class="recipe__user-generated">
+              <div class="recipe__user-generated minus-btn">
                 <svg>
                   <use href="src/img/icons.svg#icon-minus-circle"></use>
                 </svg>
               </div>
-              <button class="btn--round">
+              <button class="btn--round plus-btn">
                 <svg>
                   <use href="src/img/icons.svg#icon-plus-circle"></use>
                 </svg>
               </button>
             </div>
-          </div>
+          </div> -->
         </div>
 
         <div class="recipe__ingredients">
           <h2 class="heading--2">You Order</h2>
-          <ul class="recipe__ingredient-list">
-            <li class="recipe__ingredient">
+          <ul class="recipe__ingredient-list orderListHere">
+            <!-- <li class="recipe__ingredient">
               <svg class="recipe__icon">
                 <use href="src/img/icons.svg#icon-check"></use>
               </svg>
               <div class="recipe__quantity">4</div>
               <div class="recipe__description">Biriyani</div>
-            </li>
-
-            <li class="recipe__ingredient">
-              <svg class="recipe__icon">
-                <use href="src/img/icons.svg#icon-check"></use>
-              </svg>
-              <div class="recipe__quantity">2</div>
-              <div class="recipe__description">Chilly Chicken</div>
-            </li>
+            </li> -->
           </ul>
+          <div style="margin-top: 4rem;">
+            <label>Your Name</label>
+            <input
+              placeholder="Your Name"
+              required
+              name="title"
+              type="text"
+              id="costumerName"
+              style="padding: 1rem;"
+            />
+          </div>
         </div>
 
         <div class="recipe__directions">
-          <a class="btn--small recipe__btn" href="/cart.html">
+          <button class="btn--small recipe__btn" href="#" id="place-order-btn" >
             <span>Order</span>
             <svg class="search__icon">
               <use href="src/img/icons.svg#icon-arrow-right"></use>
             </svg>
-          </a>
+          </button>
         </div>
       </div>
     </div>
