@@ -38,7 +38,7 @@
         <nav class="nav">
           <ul class="nav__list">
             <li class="nav__item">
-              <a class="nav__btn nav__btn--add-recipe" href="cart.html">
+              <a class="nav__btn nav__btn--add-recipe" href="cart.html" style="display: none;">
                 <!-- <svg class="nav__icon">
                   <use href="src/img/icons.svg#icon-edit"></use>
                 </svg> -->
@@ -167,6 +167,14 @@
         </div>
 
         <div class="recipe__directions">
+          <form style="font-size: 1.7rem;">
+            <h3 style="font-size: 2rem; font-weight: bold;">Payment</h3>
+            
+            <input type="radio" id="html" name="payment" value="cash" style="margin-left: 0.8rem;">
+            <label for="html" style="padding: 1rem; display: inline-block;display: inline-block;">Cash</label><br>
+            <input type="radio" id="css" name="payment" value="card">
+            <label for="css" style="padding: 1rem; display: inline-block;">Card Payment</label><br>
+          </form>
           <button class="btn--small recipe__btn" href="#" id="place-order-btn" >
             <span>Order</span>
             <svg class="search__icon">

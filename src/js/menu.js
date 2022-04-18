@@ -30,7 +30,7 @@ const dishMarkUp = (dish) => {
         </svg>
       </div>
       <button class="btn--round plus-btn" data-price="${dish.Price}">
-        <svg>
+        <svg id="plus-btn">
           <use href="src/img/icons.svg#icon-plus-circle"></use>
         </svg>
       </button>
@@ -84,8 +84,10 @@ const convertOrder = (order)=> {
 }
 
 elementResult.addEventListener('click' , (e)=>{
+  console.log(e.target.className);
     if( e.target.parentElement.className == 'btn--round plus-btn'){
         //Getting dish Id
+        console.log(e.target.className);
         const dishId = e.target.parentElement.parentElement.parentElement.id;
         //Calculating total price
         const price = e.target.parentElement.dataset.price;
@@ -147,13 +149,20 @@ elementOrder.addEventListener('click', async(e)=> {
       Name : document.getElementById('costumerName').value,
       orders: placeOrder,
     }
-    const res = await axios({
+    await axios({
         method: 'POST',
         url: 'http://127.0.0.1:3000/order',
         data,
     });
+    localStorage.setItem("totalPrice", state.price);
+    localStorage.setItem("name" , data.Name);
+    
+    const pay = document.querySelector('input[name="payment"]:checked').value;
+    if(pay == "card")
+      location.assign('/payment.html');
+    else 
+      location.assign('/cart.html');
 
-    location.assign('/cart.html');
 } catch (err) {
     console.log(err);
 }
