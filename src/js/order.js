@@ -40,6 +40,10 @@ const renderResult = (data)=>{
 }
 
 const init = ()=>{
+  
+    if(!localStorage.getItem("loggedIn")){
+      location.assign('/error.html');
+    }
 
     fetch('http://127.0.0.1:3000/order')
     .then(response => response.json())

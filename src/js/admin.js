@@ -20,7 +20,6 @@ const dishMarkUp = (dish) => {
 const elementResult = document.querySelector('.results');
 
 const renderResult = (data)=>{
-    console.log(elementResult)
     data.dish.forEach((item)=>{
         //console.log(dishMarkUp(item))
         elementResult.insertAdjacentHTML('afterbegin' , dishMarkUp(item));
@@ -50,6 +49,10 @@ elementAddDish.addEventListener('submit' , async (e)=>{
 })
 
 const init = ()=>{
+
+    if(!localStorage.getItem("loggedIn")){
+        location.assign('/error.html');
+    }
 
     fetch('http://127.0.0.1:3000/getDish')
     .then(response => response.json())
