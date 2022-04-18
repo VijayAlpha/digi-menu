@@ -1,5 +1,5 @@
 const dishMarkUp = (dish) => {
-    return `
+  return `
     <li class="preview">
     <a class="preview__link preview__link--active" href="#23456">
       <figure class="preview__fig">
@@ -14,52 +14,51 @@ const dishMarkUp = (dish) => {
       </div>
     </a>
   </li>
-    `
-}
+    `;
+};
 
-const elementResult = document.querySelector('.results');
+const elementResult = document.querySelector(".results");
 
-const renderResult = (data)=>{
-    data.dish.forEach((item)=>{
-        //console.log(dishMarkUp(item))
-        elementResult.insertAdjacentHTML('afterbegin' , dishMarkUp(item));
-    })
-}
+const renderResult = (data) => {
+  data.dish.forEach((item) => {
+    //console.log(dishMarkUp(item))
+    elementResult.insertAdjacentHTML("afterbegin", dishMarkUp(item));
+  });
+};
 
 // Add Dish
-const elementAddDish = document.querySelector('#addDishForm');
+const elementAddDish = document.querySelector("#addDishForm");
 
-elementAddDish.addEventListener('submit' , async (e)=>{
-    e.preventDefault();
-    try {
-        const res = await axios({
-            method: 'POST',
-            url: 'http://127.0.0.1:3000/addDish',
-            data:  {
-                DishName : document.getElementById("DishName").value,
-                Price: document.getElementById("DishPrice").value,
-                time: document.getElementById("DishTime").value
-            },
-        });
-    
-        location.assign('/admin.html');
-    } catch (err) {
-        console.log(err.response);
-    }
-})
-
-const init = ()=>{
-
-    if(!localStorage.getItem("loggedIn")){
-        location.assign('/error.html');
-    }
-
-    fetch('http://127.0.0.1:3000/getDish')
-    .then(response => response.json())
-    .then(data => {
-    //   console.log(data);
-        renderResult(data)
+elementAddDish.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  try {
+    const res = await axios({
+      method: "POST",
+      url: "https://digi-menu-api.herokuapp.com/addDish",
+      data: {
+        DishName: document.getElementById("DishName").value,
+        Price: document.getElementById("DishPrice").value,
+        time: document.getElementById("DishTime").value,
+      },
     });
-}
+
+    location.assign("/admin.html");
+  } catch (err) {
+    console.log(err.response);
+  }
+});
+
+const init = () => {
+  if (!localStorage.getItem("loggedIn")) {
+    location.assign("/error.html");
+  }
+
+  fetch("https://digi-menu-api.herokuapp.com/getDish")
+    .then((response) => response.json())
+    .then((data) => {
+      //   console.log(data);
+      renderResult(data);
+    });
+};
 
 init();

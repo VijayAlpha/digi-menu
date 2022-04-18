@@ -1,5 +1,5 @@
 const dishMarkUp = (dish) => {
-    return `
+  return `
     <div class="recipe__details flex__btw" id="${dish._id}">
     <div class="flex flex__btw" style="flex: 1">
       <div class="recipe__info">
@@ -36,146 +36,143 @@ const dishMarkUp = (dish) => {
       </button>
     </div>
   </div>
-    `
-}
+    `;
+};
 
-const orderListMarkup = (data)=>{
-    return `
+const orderListMarkup = (data) => {
+  return `
     <li class="recipe__ingredient">
     <svg class="recipe__icon">
       <use href="src/img/icons.svg#icon-check"></use>
     </svg>
     <div class="recipe__quantity">${data[1]}</div>
     <div class="recipe__description">${data[0]}</div>
-  </li>`
-}
+  </li>`;
+};
 
-const elementResult = document.querySelector('.dish-box');
-const elementAddOrder = document.querySelector('.orderListHere');
-const elementOrder = document.querySelector('#place-order-btn');
+const elementResult = document.querySelector(".dish-box");
+const elementAddOrder = document.querySelector(".orderListHere");
+const elementOrder = document.querySelector("#place-order-btn");
 const state = {
-    order: [],
-    price: 0
+  order: [],
+  price: 0,
 };
 
 let finalOrder = [];
-let placeOrder = []
-const renderResult = (data)=>{
-    data.forEach((item)=>{
-        elementResult.insertAdjacentHTML('afterbegin' , dishMarkUp(item));
-    })
-}
+let placeOrder = [];
+const renderResult = (data) => {
+  data.forEach((item) => {
+    elementResult.insertAdjacentHTML("afterbegin", dishMarkUp(item));
+  });
+};
 
-const renderOrder = (data )=>{
-    data.forEach((item)=>{
-        elementAddOrder.insertAdjacentHTML('beforeend' , orderListMarkup(item));
-    })
-}
+const renderOrder = (data) => {
+  data.forEach((item) => {
+    elementAddOrder.insertAdjacentHTML("beforeend", orderListMarkup(item));
+  });
+};
 
-const convertOrder = (order)=> {
+const convertOrder = (order) => {
   console.log(order);
 
-  order.forEach((el , i)=>{
+  order.forEach((el, i) => {
     placeOrder.push({
       dishName: el[0],
-      Servings: el[1]
-    })
-  })
-}
+      Servings: el[1],
+    });
+  });
+};
 
-elementResult.addEventListener('click' , (e)=>{
+elementResult.addEventListener("click", (e) => {
   console.log(e.target.className);
-    if( e.target.parentElement.className == 'btn--round plus-btn'){
-        //Getting dish Id
-        console.log(e.target.className);
-        const dishId = e.target.parentElement.parentElement.parentElement.id;
-        //Calculating total price
-        const price = e.target.parentElement.dataset.price;
-        state.price += parseInt(price);
-        document.getElementById('bill-total-price').innerText = state.price;
+  if (e.target.parentElement.className == "btn--round plus-btn") {
+    //Getting dish Id
+    console.log(e.target.className);
+    const dishId = e.target.parentElement.parentElement.parentElement.id;
+    //Calculating total price
+    const price = e.target.parentElement.dataset.price;
+    state.price += parseInt(price);
+    document.getElementById("bill-total-price").innerText = state.price;
 
-        //Adding count of dish
-        const counts = {};
-        state.order.push(document.getElementById(`name-${dishId}`).innerText);
-        elementAddOrder.innerHTML = ""
-      
-        state.order.forEach(function (x) { 
-            counts[x] = (counts[x] || 0) + 1; 
-        });
+    //Adding count of dish
+    const counts = {};
+    state.order.push(document.getElementById(`name-${dishId}`).innerText);
+    elementAddOrder.innerHTML = "";
 
-        finalOrder = Object.entries(counts);
-        renderOrder(finalOrder);
-        console.log(finalOrder);
+    state.order.forEach(function (x) {
+      counts[x] = (counts[x] || 0) + 1;
+    });
+
+    finalOrder = Object.entries(counts);
+    renderOrder(finalOrder);
+    console.log(finalOrder);
+  }
+
+  if (e.target.parentElement.className == "recipe__user-generated") {
+    const dishId = e.target.parentElement.parentElement.parentElement.id;
+    const index = state.order.indexOf(
+      document.getElementById(`name-${dishId}`).innerText
+    );
+    const counts = {};
+
+    //Calculating total price
+    if (state.price > 0) {
+      const price = e.target.parentElement.dataset.price;
+      state.price -= parseInt(price);
+
+      document.getElementById("bill-total-price").innerText = state.price;
     }
 
-    if( e.target.parentElement.className == 'recipe__user-generated'){
-        const dishId = e.target.parentElement.parentElement.parentElement.id;
-        const index = state.order.indexOf(document.getElementById(`name-${dishId}`).innerText);
-        const counts = {};
-
-        //Calculating total price
-        if(state.price > 0){
-          const price = e.target.parentElement.dataset.price;
-          state.price -= parseInt(price);
-
-          document.getElementById('bill-total-price').innerText = state.price;
-        }
-       
-        if (index > -1) {
-            state.order.splice(index, 1); // 2nd parameter means remove one item only
-        }
-        console.log(state.order);
-        elementAddOrder.innerHTML = ""
-         
-        state.order.forEach(function (x) { 
-          counts[x] = (counts[x] || 0) + 1; 
-        });
-
-        // console.log(Object.getOwnPropertyNames(counts))
-        finalOrder = Object.entries(counts);
-        renderOrder(finalOrder);
-        console.log(finalOrder);
+    if (index > -1) {
+      state.order.splice(index, 1); // 2nd parameter means remove one item only
     }
-})  
+    console.log(state.order);
+    elementAddOrder.innerHTML = "";
 
-elementOrder.addEventListener('click', async(e)=> {
+    state.order.forEach(function (x) {
+      counts[x] = (counts[x] || 0) + 1;
+    });
+
+    // console.log(Object.getOwnPropertyNames(counts))
+    finalOrder = Object.entries(counts);
+    renderOrder(finalOrder);
+    console.log(finalOrder);
+  }
+});
+
+elementOrder.addEventListener("click", async (e) => {
   e.preventDefault();
 
   try {
     convertOrder(finalOrder);
-    console.log(placeOrder)
+    console.log(placeOrder);
 
     const data = {
-      Name : document.getElementById('costumerName').value,
+      Name: document.getElementById("costumerName").value,
       orders: placeOrder,
-    }
+    };
     await axios({
-        method: 'POST',
-        url: 'http://127.0.0.1:3000/order',
-        data,
+      method: "POST",
+      url: "https://digi-menu-api.herokuapp.com/order",
+      data,
     });
     localStorage.setItem("totalPrice", state.price);
-    localStorage.setItem("name" , data.Name);
-    
+    localStorage.setItem("name", data.Name);
+
     const pay = document.querySelector('input[name="payment"]:checked').value;
-    if(pay == "card")
-      location.assign('/payment.html');
-    else 
-      location.assign('/cart.html');
-
-} catch (err) {
+    if (pay == "card") location.assign("/payment.html");
+    else location.assign("/cart.html");
+  } catch (err) {
     console.log(err);
-}
-})
+  }
+});
 
-
-const init = async ()=>{
-
-    await fetch('http://127.0.0.1:3000/getDish')
-    .then(response => response.json())
-    .then(data => {
-        renderResult(data.dish)
+const init = async () => {
+  await fetch("https://digi-menu-api.herokuapp.com/getDish")
+    .then((response) => response.json())
+    .then((data) => {
+      renderResult(data.dish);
     });
-}
+};
 
 init();

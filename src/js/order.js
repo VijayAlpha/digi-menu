@@ -1,5 +1,5 @@
 const orderMarkUp = (order) => {
-    return `
+  return `
     <li class="preview">
     <a class="preview__link preview__link--active" href="#23456">
       <figure class="preview__fig">
@@ -13,44 +13,45 @@ const orderMarkUp = (order) => {
       </div>
     </a>
   </li>
-    `
-}
+    `;
+};
 
 const dishList = (data) => {
-    return `
+  return `
         <div class="flex flex__btw">
             <p class="preview__publisher">${data.dishName}</p>
             <p class="preview__publisher">${data.Servings}</p>
-        </div>`
-}
+        </div>`;
+};
 
-const elementResult = document.querySelector('.results');
+const elementResult = document.querySelector(".results");
 
-const renderResult = (data)=>{
-   console.log(data.order)
-    data.order.forEach((item)=>{
-        console.log(item.Name)
-        
-        elementResult.insertAdjacentHTML('afterbegin' , orderMarkUp(item));
+const renderResult = (data) => {
+  console.log(data.order);
+  data.order.forEach((item) => {
+    console.log(item.Name);
 
-        item.orders.forEach((dishItem)=>{
-            document.querySelector('.preview__data').insertAdjacentHTML('beforeend' , dishList(dishItem));
-        })
-    })
-}
+    elementResult.insertAdjacentHTML("afterbegin", orderMarkUp(item));
 
-const init = ()=>{
-  
-    if(!localStorage.getItem("loggedIn")){
-      location.assign('/error.html');
-    }
-
-    fetch('http://127.0.0.1:3000/order')
-    .then(response => response.json())
-    .then(data => {
-      console.log(data);
-         renderResult(data)
+    item.orders.forEach((dishItem) => {
+      document
+        .querySelector(".preview__data")
+        .insertAdjacentHTML("beforeend", dishList(dishItem));
     });
-}
+  });
+};
+
+const init = () => {
+  if (!localStorage.getItem("loggedIn")) {
+    location.assign("/error.html");
+  }
+
+  fetch("https://digi-menu-api.herokuapp.com/order")
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      renderResult(data);
+    });
+};
 
 init();
