@@ -24,12 +24,12 @@ const dishMarkUp = (dish) => {
       </div>
     </div>
     <div class="flex">
-      <div class="recipe__user-generated">
+      <div class="recipe__user-generated" data-price="${dish.Price}">
         <svg>
           <use href="src/img/icons.svg#icon-minus-circle"></use>
         </svg>
       </div>
-      <button class="btn--round plus-btn">
+      <button class="btn--round plus-btn" data-price="${dish.Price}">
         <svg>
           <use href="src/img/icons.svg#icon-plus-circle"></use>
         </svg>
@@ -54,7 +54,8 @@ const elementResult = document.querySelector('.dish-box');
 const elementAddOrder = document.querySelector('.orderListHere');
 const elementOrder = document.querySelector('#place-order-btn');
 const state = {
-    order: []
+    order: [],
+    price: 0
 };
 
 let finalOrder = [];
@@ -84,20 +85,25 @@ const convertOrder = (order)=> {
 
 elementResult.addEventListener('click' , (e)=>{
     if( e.target.parentElement.className == 'btn--round plus-btn'){
+        //Getting dish Id
         const dishId = e.target.parentElement.parentElement.parentElement.id;
+        //Calculating total price
+        const price = e.target.parentElement.dataset.price;
+        state.price += parseInt(price);
+        document.getElementById('bill-total-price').innerText = state.price;
+
+        //Adding count of dish
         const counts = {};
         state.order.push(document.getElementById(`name-${dishId}`).innerText);
         elementAddOrder.innerHTML = ""
-        
-
+      
         state.order.forEach(function (x) { 
             counts[x] = (counts[x] || 0) + 1; 
         });
 
-       // console.log(Object.getOwnPropertyNames(counts))
-       finalOrder = Object.entries(counts);
-       renderOrder(finalOrder);
-       console.log(finalOrder);
+        finalOrder = Object.entries(counts);
+        renderOrder(finalOrder);
+        console.log(finalOrder);
     }
 
     if( e.target.parentElement.className == 'recipe__user-generated'){
@@ -105,15 +111,23 @@ elementResult.addEventListener('click' , (e)=>{
         const index = state.order.indexOf(document.getElementById(`name-${dishId}`).innerText);
         const counts = {};
 
+        //Calculating total price
+        if(state.price > 0){
+          const price = e.target.parentElement.dataset.price;
+          state.price -= parseInt(price);
+
+          document.getElementById('bill-total-price').innerText = state.price;
+        }
+       
         if (index > -1) {
             state.order.splice(index, 1); // 2nd parameter means remove one item only
         }
-          console.log(state.order);
-          elementAddOrder.innerHTML = ""
+        console.log(state.order);
+        elementAddOrder.innerHTML = ""
          
         state.order.forEach(function (x) { 
           counts[x] = (counts[x] || 0) + 1; 
-          });
+        });
 
         // console.log(Object.getOwnPropertyNames(counts))
         finalOrder = Object.entries(counts);

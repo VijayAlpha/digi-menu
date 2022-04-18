@@ -34,6 +34,10 @@ html {
   @media only screen and (max-width: $bp-medium) {
     font-size: 50%;
   }
+
+  @media only screen and (max-width: 400px) {
+    font-size: 40%;
+  }
 }
 
 body {
@@ -83,5 +87,9 @@ body {
 
   &__even{
     justify-content: space-evenly;
+  }
+
+  &__center{
+    justify-content: center;
   }
 }
