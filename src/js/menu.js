@@ -62,7 +62,7 @@ let finalOrder = [];
 let placeOrder = [];
 const renderResult = (data) => {
   data.forEach((item) => {
-    elementResult.insertAdjacentHTML("afterbegin", dishMarkUp(item));
+    elementResult.insertAdjacentHTML("beforebegin", dishMarkUp(item));
   });
 };
 
