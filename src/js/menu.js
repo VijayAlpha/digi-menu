@@ -50,6 +50,8 @@ const orderListMarkup = (data) => {
   </li>`;
 };
 
+const headingName = `<h2 class="heading--2" style="flex: 1 ; margin: 2rem ; display:block">Side Dish</h2>`
+
 const elementResult = document.querySelector(".dish-box");
 const elementAddOrder = document.querySelector(".orderListHere");
 const elementOrder = document.querySelector("#place-order-btn");
@@ -60,8 +62,12 @@ const state = {
 
 let finalOrder = [];
 let placeOrder = [];
+
 const renderResult = (data) => {
-  data.forEach((item) => {
+  data.forEach((item , i ) => {
+    if(i == 9){
+      elementResult.insertAdjacentHTML("beforeend", headingName);
+    }
     elementResult.insertAdjacentHTML("beforeend", dishMarkUp(item));
   });
 };
